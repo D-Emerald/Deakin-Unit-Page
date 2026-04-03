@@ -1,4 +1,4 @@
-name: Build and Deploy GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -14,26 +14,12 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
+      # Checkout your repo
       - uses: actions/checkout@v3
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2
-
-      - name: Install Bundler and GitHub Pages
-        run: |
-          gem install bundler
-          bundle install
-
-      - name: Build Jekyll site
-        run: bundle exec jekyll build -d ./_site
-
+      # Deploy root folder to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
         with:
-          artifact_name: _site
+          artifact_name: .
