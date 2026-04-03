@@ -1,4 +1,4 @@
-name: Build and Deploy Jekyll Site
+name: Build and Deploy GitHub Pages
 
 on:
   push:
@@ -7,29 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: Build Jekyll site
-      uses: actions/jekyll-build-pages@v1
-      with:
-        source: ./       # root folder
-        destination: ./_site
-
-    - name: Upload _site
-      uses: actions/upload-pages-artifact@v1
-      with:
-        path: ./_site
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-pages-artifact@v1
-        with:
-          path: ./_site
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v1
