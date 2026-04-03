@@ -18,5 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Deploy to GitHub Pages
+    - name: Build and Deploy GitHub Pages
       uses: actions/deploy-pages@v1
+      with:
+        # Set source to root folder
+        source: . 
